@@ -19,13 +19,13 @@ This gives a quick overview of some lightweight and reliable command-line tools 
 Copy `myfile` to my home directory
 
 ```
-scp /path/to/file/myfile boyle@ceiba.ncea.ucsb.edu 
+scp /path/to/file/myfile boyle@ceiba.nceas.ucsb.edu 
 ```
 
 Copy `myfile` to subdirectory `data` in my home directory:
 
 ```
-scp /path/to/file/myfile boyle@ceiba.ncea.ucsb.edu:data/ 
+scp /path/to/file/myfile boyle@ceiba.nceas.ucsb.edu:data/ 
 ```
 Notes:
 * If you haven’t set a passwordless SSH login to the remote machine, you will be asked to enter the user password.
@@ -39,7 +39,7 @@ Compress and transfer from the source machine:
 
 ```
 tar -czf mybigdirectoryfulloffiles.tar.gz mybigdirectoryfulloffiles
-scp mybigdirectoryfulloffiles.tar.gz boyle@ceiba.ncea.ucsb.edu:data/ 
+scp mybigdirectoryfulloffiles.tar.gz boyle@ceiba.nceas.ucsb.edu:data/ 
 ```
 
 Uncompress on the target machine:
@@ -58,7 +58,7 @@ If you have passwordless authentication set up, basic rsync commands look much l
 On the source machine:
 
 ```
-rsync -a myfile boyle@ceiba.ncea.ucsb.edu:data/
+rsync -a myfile boyle@ceiba.nceas.ucsb.edu:data/
 ```
 
 If the transfer will take a very long time, run the command in `screen`.
@@ -95,14 +95,14 @@ done
 If you are running PowerShell, you can use executable pscp.exe, which is roughly equivalent to scp:
 
 ```
-pscp -pw password /path/to/file/myfile boyle@ceiba.ncea.ucsb.edu:data/ 
+pscp -pw password /path/to/file/myfile boyle@ceiba.nceas.ucsb.edu:data/ 
 ```
 * This sends the password as plain text (not recommended!)
 
 As a safer option, if you have passwordless authentication set up on the remote machine, you can do this instead:
 
 ```
-pscp -i /path/to/file/myfile boyle@ceiba.ncea.ucsb.edu:data/ 
+pscp -i /path/to/file/myfile boyle@ceiba.nceas.ucsb.edu:data/ 
 ```
 
 ### Git BASH (for rsync)
