@@ -63,7 +63,7 @@ rsync -a myfile boyle@ceiba.nceas.ucsb.edu:data/
 
 If the transfer will take a very long time, run the command in `screen`.
 
-If the connection is weak or intermittent, wrapping rsync in the following bash script will allow your transfer to repeating resume on its own until the transfer is complete. You must have passwordless authentication for this to work.
+If the connection is weak or intermittent, wrapping rsync in the following bash script will allow your transfer to resume on its own until the transfer is complete. You must have passwordless authentication for this to work.
 
 ```
 #!/bin/bash
@@ -90,6 +90,8 @@ done
 
 <a name="windows"></a>
 ## From Windows
+
+I haven't tried these solutions personally, but they sound reasonable. I anyone has updated information or better options, feel free to modify.
 
 ### pscp
 If you are running PowerShell, you can use executable pscp.exe, which is roughly equivalent to scp:
