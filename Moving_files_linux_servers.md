@@ -9,7 +9,7 @@
 <a name="introduction"></a>
 ## Introduction
 
-This gives a quick overview of some lightweight and reliable command-line tools you can used to transfer files to the BIEN servers. If you have passwordless authentication set up on the BIEN server, you can run these passwords without having to enter a password, which makes them ideal for automated use in scripts. The BIEN server administrators can help you set up passwordless authentication.
+This gives a quick overview of some lightweight and reliable command-line tools you can used to transfer files to the BIEN servers. If you have passwordless authentication set up on the BIEN server, you can run these commands without having to enter a password, which makes them ideal for automated use in scripts. The BIEN server administrators (current Brad Boyle and Nick Outin) can help you set up passwordless authentication.
 
 <a name="linux"></a>
 ## From Linux/Mac
