@@ -85,12 +85,12 @@ If the connection is weak or intermittent, wrapping rsync in the following bash 
 SOURCEFILE="path/to/you/file"
 REMOTE_USER="remote_server_user_name"
 SERVER_ADDRESS="remote_server_address_or_IP"
-DEST_DIR="destination_directory_no_trailing_slash"
+DEST_DIR="destination_directory_with_trailing_slash"
 
 # Main
 while [ 1 ]
 do
-    rsync -avz --partial ${SOURCEFILE} ${REMOTE_USER}@${SERVER_ADDRESS}:${DEST_DIR}/
+    rsync -avz --partial ${SOURCEFILE} ${REMOTE_USER}@${SERVER_ADDRESS}:${DEST_DIR}
     if [ "$?" = "0" ] ; then
         echo "rsync completed normally"
         exit
