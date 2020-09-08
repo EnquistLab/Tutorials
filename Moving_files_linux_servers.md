@@ -9,23 +9,35 @@
 <a name="introduction"></a>
 ## Introduction
 
-This gives a quick overview of some lightweight and reliable command-line tools you can used to transfer files to the BIEN servers. If you have passwordless authentication set up on the BIEN server, you can run these commands without having to enter a password, which makes them ideal for automated use in scripts. The BIEN server administrators (current Brad Boyle and Nick Outin) can help you set up passwordless authentication.
+This gives a quick overview of some lightweight and reliable command-line tools you can used to transfer files to unix servers such as the BIEN servers. If you have passwordless authentication set up on the BIEN server, you can run these commands without having to enter a password, which makes them ideal for automated use in scripts. The BIEN server administrators (current Brad Boyle and Nick Outin) can help you set up passwordless authentication.
 
 <a name="linux"></a>
 ## From Linux/Mac
 
 ### scp (secure copy)
 
-Copy `myfile` to my home directory
+Copy `myfile` to user's home directory
 
 ```
-scp /path/to/file/myfile boyle@ceiba.nceas.ucsb.edu 
+scp /path/to/file <username>@<server_address>
 ```
 
-Copy `myfile` to subdirectory `data` in my home directory:
+E.g.,
 
 ```
-scp /path/to/file/myfile boyle@ceiba.nceas.ucsb.edu:data/ 
+scp mybigfile.zip boyle@ceiba.nceas.ucsb.edu 
+```
+
+Copy file to subdirectory in user's home directory:
+
+
+```
+scp /path/to/file <username>@<server_address>:destination/path/in/users/home/directory/ 
+```
+E.g., 
+
+```
+scp mybigfile.zip boyle@ceiba.nceas.ucsb.edu:data/ 
 ```
 Notes:
 * If you haven’t set a passwordless SSH login to the remote machine, you will be asked to enter the user password.
@@ -49,11 +61,14 @@ cd ~/data
 tar -xzf mybigdirectoryfulloffiles.tar.gz
 ```
 
+Notes:
+* If you have many files in deeply nested directories, tar + scp will be slow. Consider using rsyn instead (see below).
+
 ### rsync
 
-Rsync transfers files by parts. It can resume transfers when connections are interrupted. It can transfer entire directories, and is commonly used to back up files because it compares and copies only the parts that have changed. To work properly, rsync needs to be installed on both machines. All our servers have rsync installed.
+Rsync transfers files by parts. It can resume transfers when connections are interrupted. It can transfer entire directories, and is commonly used to back up files because it compares and copies only the parts that have changed. Consider using rsync if (a) you are transfering very large files (rsync can resume an interrupted file transfer), (b) you need to transfer many files at once (rsync is very efficient at reading deeply nested file structures), or (c) any time connectivity problems may interfere with data transfers. 
 
-If you have passwordless authentication set up, basic rsync commands look much like scp.
+To work properly, rsync needs to be installed on both machines. All our servers have rsync installed. If you have passwordless authentication set up, basic rsync commands look much like scp.
 
 On the source machine:
 
@@ -88,6 +103,8 @@ do
 done
 ```
 
+For more rsync examples, including options for parallelization, see this excellent article: http://moo.nac.uci.edu/~hjm/HOWTO_move_data.html.
+
 <a name="windows"></a>
 ## From Windows
 
@@ -107,9 +124,9 @@ As a safer option, if you have passwordless authentication set up on the remote 
 pscp -i /path/to/file/myfile boyle@ceiba.nceas.ucsb.edu:data/ 
 ```
 
-### Git BASH (for rsync)
+### Git BASH (rsync)
 
-I haven't used it, but apparently there is a bash-shell simulator for Windows: Git BASH (https://gitforwindows.org/). See discussion at https://superuser.com/a/915733/1136490.
+I haven't used it, but apparently there is a bash-shell simulator for Windows that includes rsync: Git BASH (https://gitforwindows.org/). See discussion at https://superuser.com/a/915733/1136490.
 
 Here's an example from the above superuser post:
 
