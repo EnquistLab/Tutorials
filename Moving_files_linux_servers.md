@@ -16,7 +16,7 @@ This gives a quick overview of some lightweight and reliable command-line tools 
 
 ### scp (secure copy)
 
-Copy `myfile` to user's home directory
+Copy `file` to user's home directory
 
 ```
 scp /path/to/file <username>@<server_address>
@@ -30,7 +30,6 @@ scp mybigfile.zip boyle@ceiba.nceas.ucsb.edu
 
 Copy file to subdirectory in user's home directory:
 
-
 ```
 scp /path/to/file <username>@<server_address>:destination/path/in/users/home/directory/ 
 ```
@@ -41,9 +40,7 @@ scp mybigfile.zip boyle@ceiba.nceas.ucsb.edu:data/
 ```
 Notes:
 * If you haven’t set a passwordless SSH login to the remote machine, you will be asked to enter the user password.
-* Brad or Nick can help you set up passwordless authentication.
-
-If you are transferring a bunch of files, or multiple files insides directories and subdirectories, you should tar & compress them first, then transfer with scp and uncompress on the other end.
+* If you are transferring a bunch of files, or multiple files insides directories and subdirectories, you should generally tar & compress them first, then transfer with scp and uncompress on the other end:
 
 #### Example: copy directory `mybigdirectoryfulloffiles/` to directory `data/` in my home directory on ceiba:
 
@@ -61,8 +58,9 @@ cd ~/data
 tar -xzf mybigdirectoryfulloffiles.tar.gz
 ```
 
-Notes:
-* If you have many files in deeply nested directories, tar + scp will be slow. Consider using rsyn instead (see below).
+Note:
+* For deep tree structures with many directories and many files, compressing & tarring can be very time comsuming. In such cases, rsync without compression may be substantially faster.
+
 
 ### rsync
 
@@ -103,7 +101,9 @@ do
 done
 ```
 
-For more rsync examples, including options for parallelization, see this excellent article: http://moo.nac.uci.edu/~hjm/HOWTO_move_data.html.
+Notes:
+* If you need a more full-featured version of the above script, with error-checking and the ability to set all parameters on the command line, let me know and I will tweak it for you.
+* For more rsync examples, including options for parallelization, see this excellent article: http://moo.nac.uci.edu/~hjm/HOWTO_move_data.html.
 
 <a name="windows"></a>
 ## From Windows
