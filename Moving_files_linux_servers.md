@@ -71,7 +71,7 @@ To work properly, rsync needs to be installed on both machines. All our servers 
 On the source machine:
 
 ```
-rsync -a myfile boyle@ceiba.nceas.ucsb.edu:data/
+rsync -avz myfile boyle@ceiba.nceas.ucsb.edu:data/
 ```
 
 If the transfer will take a very long time, run the command in `screen`.
@@ -102,8 +102,9 @@ done
 ```
 
 Notes:
-* If you need a more full-featured version of the above script, with error-checking and the ability to set all parameters on the command line, let me know and I will tweak it for you.
-* For more rsync examples, including options for parallelization, see this excellent article: http://moo.nac.uci.edu/~hjm/HOWTO_move_data.html.
+* If you need a more full-featured version of the above script, with error-checking and the ability to set all parameters on the command line, let me know and I will tweak it for you.  
+* Rsync has ***tons*** of options. Be sure to check them out: `man rsync`.  
+* For more rsync examples, including options for parallelization, see this excellent article: http://moo.nac.uci.edu/~hjm/HOWTO_move_data.html.  
 
 <a name="windows"></a>
 ## From Windows
