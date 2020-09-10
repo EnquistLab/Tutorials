@@ -104,7 +104,7 @@ cat ~/.ssh/id_rsa.pub | ssh remote_username@server_ip_address "mkdir -p ~/.ssh &
 <a name="usage"></a>
 ## Usage
 
-One your SSH keys have been set up, you login to the remote machine as usual, except that now password is requested:
+One your SSH keys have been set up, you login to the remote machine as usual, except that no password is requested:
 
 ```
 ssh remote_username@server_ip_address
