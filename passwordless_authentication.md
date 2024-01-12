@@ -25,7 +25,7 @@ Adapted from: https://linuxize.com/post/how-to-setup-passwordless-ssh-login/.
 SSH keys come in pairs: a public key and a private key. The public key is intended to be shared with other machines. It is used by that machine to request access to your machine. Your machine then matches up that key with the corresponding private key to confirm that it is indeed authentic. If authentic, the connection is allowed; if any issues are encountered in pairing the public with the private key, the connection is refused.
 
 <a name="where"></a>
-## Where are my SSH keys
+## Where are my SSH keys?
 
 SSH keys are specific to a machine+user combination. Your SSH keys live in your home directory in (hidden) directory `.ssh`. To list all directories in your home directory, including hidden directories and files, use the -a option ("all") with the `ls` command. I also add the -l option ("long") for detailed vertical display:
 
