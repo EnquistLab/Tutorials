@@ -1,4 +1,4 @@
-# Copying files to unix servers
+# Copying files to and from unix servers
 
 ## Contents
 
@@ -14,35 +14,49 @@ This gives a quick overview of some lightweight and reliable command-line tools 
 <a name="linux"></a>
 ## From Linux/Mac
 
-### scp (secure copy)
+### 1. scp (secure copy)
+* In all of the examples below, the commands are issue from your local machine.
+* Note that ":~/" means your base home directory on the server
 
-Copy `file` to user's home directory
+Copy `file` from local machine to user's home directory
 
 ```
-scp /path/to/file <username>@<server_address>
+scp /path/to/file <username>@<server_address>:~/
 ```
 
 E.g.,
 
 ```
-scp mybigfile.zip boyle@ceiba.nceas.ucsb.edu 
+scp mybigfile.zip boyle@ceiba.nceas.ucsb.edu:~/ 
 ```
 
 Copy file to subdirectory in user's home directory:
 
 ```
-scp /path/to/file <username>@<server_address>:destination/path/in/users/home/directory/ 
+scp /path/to/file <username>@<server_address>:~/destination/path/in/users/home/directory/ 
 ```
 E.g., 
 
 ```
-scp mybigfile.zip boyle@ceiba.nceas.ucsb.edu:data/ 
+scp mybigfile.zip boyle@ceiba.nceas.ucsb.edu:~/data/ 
 ```
-Notes:
-* If you haven’t set a passwordless SSH login to the remote machine, you will be asked to enter the user password.
+
+Copy file from server to current directory on my local machine ("." means current directory):
+
+```
+scp boyle@ceiba.nceas.ucsb.edu:~/data/mybigfile.zip .
+```
+
+###Notes:
+
+#### (i) Passwordless authentication
+* If you haven’t set a passwordless SSH login to the remote machine, you will be asked to enter the user password.  
+* I strongly recommend you set up passwordless authentication as NCEAS may soon disable password access to their server. See separate tutorial on this topic. Let me know if you need help.  
+
+#### (ii) File compression
 * If you are transferring a bunch of files, or multiple files insides directories and subdirectories, you should generally tar & compress them first, then transfer with scp and uncompress on the other end:
 
-#### Example: copy directory `mybigdirectoryfulloffiles/` to directory `data/` in my home directory on ceiba:
+##### Example: copy directory `mybigdirectoryfulloffiles/` to directory `data/` in my home directory on ceiba:
 
 Compress and transfer from the source machine:
 
@@ -58,11 +72,10 @@ cd ~/data
 tar -xzf mybigdirectoryfulloffiles.tar.gz
 ```
 
-Note:
-* For deep tree structures with many directories and many files, compressing & tarring can be very time comsuming. In such cases, rsync without compression may be substantially faster.
+* For deep tree structures with many directories and many files, compressing & tarring can be very time comsuming. In such cases, rsync without compression may be faster.
 
 
-### rsync
+### 2. rsync
 
 Rsync transfers files by parts. It can resume transfers when connections are interrupted. It can transfer entire directories, and is commonly used to back up files because it compares and copies only the parts that have changed. Consider using rsync if (a) you are transfering very large files (rsync can resume an interrupted file transfer), (b) you need to transfer many files at once (rsync is very efficient at reading deeply nested file structures), or (c) any time connectivity problems may interfere with data transfers. 
 
@@ -71,7 +84,7 @@ To work properly, rsync needs to be installed on both machines. All our servers 
 On the source machine:
 
 ```
-rsync -avz myfile boyle@ceiba.nceas.ucsb.edu:data/
+rsync -avz myfile boyle@ceiba.nceas.ucsb.edu:~/data/
 ```
 
 If the transfer will take a very long time, run the command in `screen`.
@@ -111,21 +124,21 @@ Notes:
 
 I haven't tried these solutions personally, but they sound reasonable. I anyone has updated information or better options, feel free to modify.
 
-### pscp
+### 1. pscp
 If you are running PowerShell, you can use executable pscp.exe, which is roughly equivalent to scp:
 
 ```
-pscp -pw password /path/to/file/myfile boyle@ceiba.nceas.ucsb.edu:data/ 
+pscp -pw password /path/to/file/myfile boyle@ceiba.nceas.ucsb.edu:~/data/ 
 ```
 * This sends the password as plain text (not recommended!)
 
 As a safer option, if you have passwordless authentication set up on the remote machine, you can do this instead:
 
 ```
-pscp -i /path/to/file/myfile boyle@ceiba.nceas.ucsb.edu:data/ 
+pscp -i /path/to/file/myfile boyle@ceiba.nceas.ucsb.edu:~/data/ 
 ```
 
-### Git BASH (rsync)
+### 2. Git BASH (rsync)
 
 I haven't used it, but apparently there is a bash-shell simulator for Windows that includes rsync: Git BASH (https://gitforwindows.org/). See discussion at https://superuser.com/a/915733/1136490.
 

@@ -1,4 +1,4 @@
-# How to set up passwordless SSH login
+# How to set up passwordless SSH login from Linux/Mac
 
 ## Contents
 
@@ -15,7 +15,7 @@
 
 This tutorial decribes how to set up SSH key-based authentication (passwordless login) between your local machine and a remote server. Once set up, this allows you to log into the remote server without entering a password. The main advantage of passwordless authentication is that it enables you to automate transactions between the two machines--for example, transferring files--without the need for the human intervention needed to enter passwords.
 
-This tutorial assumes that both local and remote machines are Linux or Mac (which share more-or-less identical directory structures, at least with respect to SSH).
+This tutorial assumes that both local and remote machines are Linux or Mac (which share more-or-less identical directory structures, at least with respect to SSH). If you are logging in from a Windows machines, see alternative tutorial, passwordless\_authetication\_windows.
 
 Adapted from: https://linuxize.com/post/how-to-setup-passwordless-ssh-login/.
 
