@@ -1,9 +1,23 @@
 # Ubuntu server logs
 
-## Refs
-https://sematext.com/blog/ubuntu-logs/#:~:text=In%20the%20Ubuntu%20Dash%2C%20search,search%20for%20logs%20using%20keywords
+## Contents
 
-## General
+* [Overview](#overview)  
+* [General organization](#General-organization)  
+* [System logs](#system-logs)  
+* [Service logs](#service-logs)  
+* [Application logs](#Application-logs)
+ * [MySQL logs](#mysql-logs)  
+ * [Postgres logs](#posgres-logs)  
+* [Working with log files](#working)  
+* [References](#References)  
+
+## Overview
+
+This README documents the locations, names and basic functions of major log files under Ubuntu (18.04 and higher).
+
+<a name="General-organization"></a>
+## General organization
 
 #### `/var/log/`
 * root directory of the majority of log files  
@@ -11,6 +25,7 @@ https://sematext.com/blog/ubuntu-logs/#:~:text=In%20the%20Ubuntu%20Dash%2C%20sea
 * the majority of programs will log data to files in the /var/log subdirectory
 * the OS will use syslog
 
+<a name="system-logs"></a>
 ## System logs
 
 #### Authorization Log
@@ -42,7 +57,8 @@ dmesg | less
 * Contains exhaustive information about the state of an Ubuntu system
 * Applications or services that do not have their own log files use this file to store logging information
 
-### Service logs
+<a name="service-logs"></a> 
+## Service logs
 * service logs are system logs that capture information about the state of your services
 * You can look into an event logged by the daemon systemd-journald if logs about a specific service are not found in `/var/log`
 * This daemon publishes a single stream combining the log outputs from all services to the central journal in **`/{run,var}/log/journal`**
@@ -108,6 +124,7 @@ journalctl -b
 grep sshd /var/log/auth.log | less
 ```
 
+<a name="Application-logs"></a> 
 ## Application Logs
 * Analyze application logs as the first step when attempting to identify the source of an application error
 
@@ -124,7 +141,7 @@ grep sshd /var/log/auth.log | less
 * errors that happen while the Apache server processes requests
 * helpful for troubleshooting Apache server issues and can contain insights into the root cause
 
-#### Docker Log
+#### Docker log
 * Saved to folder **`/var/lib/docker/containers/`**
 * Access them using the following command:
 
@@ -132,7 +149,12 @@ grep sshd /var/log/auth.log | less
 docker logs [OPTIONS] <CONTAINER-NAME OR ID>
 ```
 
-#### PostgreSQL Log
+<a name="mysql-logs"></a>
+#### MySQL logs
+* In **`/var/log/mysql/`**, or **`/var/log/`**, or sometimes both
+
+<a name="posgres-logs"></a>
+#### PostgreSQL log
 * **`/var/log/postgresql/postgresql-x.x.main.log`**
 * (**x.x** is Postgres version #)
 * By default, PostgreSQL logs are streamed to stderr
@@ -161,5 +183,11 @@ lastlog | less
 * stores information about users currently logged into the system
 * can be parsed by command line utilities such as the command `who`
 
+<a name="working"></a>
 ## Working with log files
 * See the bottom of the website cited above (under **Refs**) for more informationon working with logs in Ubuntu
+
+<a name="References"></a>
+## References
+https://sematext.com/blog/ubuntu-logs/#:~:text=In%20the%20Ubuntu%20Dash%2C%20search,search%20for%20logs%20using%20keywords
+
