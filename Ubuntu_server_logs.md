@@ -10,8 +10,8 @@
 * [Service logs](#service-logs)  
 * [Application logs](#Application-logs)
 
- - [MySQL logs](#mysql-logs)  
- - [Postgres logs](#posgres-logs)  
+   * [MySQL logs](#mysql-logs)  
+   * [Postgres logs](#posgres-logs)  
 
 * [Working with log files](#working)  
 * [References](#References)  
